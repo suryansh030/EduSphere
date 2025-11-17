@@ -18,7 +18,7 @@ export default function Navbar() {
       {/* Right Section */}
       <div className="flex gap-4 items-center">
         <Link to="/studentlogin">
-        <button className="px-4 py-2 border-blue-600 border rounded-md text-white hover:bg-blue-50">
+        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 hover:opacity-80">
           Login
         </button>
         </Link >
