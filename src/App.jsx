@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // Adding .jsx extensions back to fix file resolution errors
 // Landing + Role Select
 import LandingPage from "./pages/LandingPage.jsx";
+import SkillGapApp from "./skillGap/SkillGapApp.jsx";
 
 // Student Pages
 import StudentSignUpPage from "./pages/StudentSignupPage.jsx";
@@ -52,16 +53,21 @@ export default function App() {
         <Route path="/studentdashboard" element={<StudentDashboard />} />
         <Route path="/logbook" element={<LogbookPage />} />
         <Route path="/activitytracker" element={<ActivityTrackerPage />} />
+        
+
+        {/* NEW: Skill Gap Analysis route */}
+        <Route path="/skill-gap" element={<SkillGapApp />} />
 
         {/* ---------------- FACULTY ROUTES ---------------- */}
         <Route path="/facultylogin" element={<FacultyLoginPage />} /> 
         <Route path="/facultysignup" element={<FacultySignupPage />} />
         <Route path="/faculty/dashboard" element={<FacultyDashboard />} />
-<Route path="/internships" element={<Internships />} />
+        <Route path="/internships" element={<Internships />} />
+
         {/* ---------------- COMPANY ROUTES ---------------- */}
         <Route path="/companysignup" element={<CompanySignupPage />} />
         <Route path="/companylogin" element={<CompanyLoginPage />} /> 
-                <Route path="/courses" element={<Courses />} />
+        <Route path="/courses" element={<Courses />} />
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/academicdashboard" element={<AcademicDashboard />} />
         <Route path="/certificates" element={<Certificates />} />

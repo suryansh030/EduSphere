@@ -1,0 +1,1703 @@
+/* ============================================
+PROFILE FORM STYLES
+WHITE & BLUE THEME WITH DARK/LIGHT MODE
+Student Details & Loading Page
+Facebook Blue: #1877F2
+============================================ */
+
+/* ============================================
+LIGHT MODE VARIABLES (DEFAULT)
+============================================ */
+:root {
+  /* Primary Blue Palette */
+  --form-blue: #1877F2;
+  --form-blue-dark: #0D65D9;
+  --form-blue-darker: #0B5AC4;
+  --form-blue-light: #4A9FF9;
+  --form-blue-lighter: #E7F3FF;
+  --form-blue-lightest: #F0F7FF;
+  
+  /* Background Colors */
+  --form-bg-primary: #FFFFFF;
+  --form-bg-secondary: #F8FAFC;
+  --form-bg-tertiary: #F1F5F9;
+  --form-bg-input: #FFFFFF;
+  --form-bg-hover: #E7F3FF;
+  --form-bg-page: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 50%, #F0F7FF 100%);
+  
+  /* Text Colors */
+  --form-text-primary: #1E293B;
+  --form-text-secondary: #475569;
+  --form-text-tertiary: #64748B;
+  --form-text-muted: #94A3B8;
+  --form-text-inverse: #FFFFFF;
+  --form-text-placeholder: #9CA3AF;
+  
+  /* Border Colors */
+  --form-border-light: #E2E8F0;
+  --form-border-medium: #CBD5E1;
+  --form-border-focus: #1877F2;
+  --form-border-error: #EF4444;
+  --form-border-success: #10B981;
+  
+  /* Status Colors */
+  --form-success: #10B981;
+  --form-success-light: #D1FAE5;
+  --form-success-dark: #059669;
+  --form-success-bg: #ECFDF5;
+  --form-success-text: #065F46;
+  
+  --form-warning: #F59E0B;
+  --form-warning-light: #FEF3C7;
+  --form-warning-dark: #D97706;
+  --form-warning-bg: #FFFBEB;
+  --form-warning-text: #92400E;
+  
+  --form-error: #EF4444;
+  --form-error-light: #FEE2E2;
+  --form-error-dark: #DC2626;
+  --form-error-bg: #FEF2F2;
+  --form-error-text: #991B1B;
+  
+  --form-info: #3B82F6;
+  --form-info-light: #DBEAFE;
+  --form-info-bg: #EFF6FF;
+  --form-info-text: #1E40AF;
+  
+  /* Shadows */
+  --form-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --form-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --form-shadow-md: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --form-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --form-shadow-xl: 0 25px 60px rgba(0, 0, 0, 0.12);
+  
+  /* Blue Shadows & Glows */
+  --form-shadow-blue: 0 10px 40px rgba(24, 119, 242, 0.2);
+  --form-shadow-blue-lg: 0 20px 60px rgba(24, 119, 242, 0.25);
+  --form-glow-blue: 0 0 25px rgba(24, 119, 242, 0.4);
+  --form-glow-blue-soft: 0 0 15px rgba(24, 119, 242, 0.25);
+  --form-glow-blue-intense: 0 0 40px rgba(24, 119, 242, 0.5);
+  
+  /* Status Glows */
+  --form-glow-success: 0 0 20px rgba(16, 185, 129, 0.35);
+  --form-glow-warning: 0 0 20px rgba(245, 158, 11, 0.35);
+  --form-glow-error: 0 0 20px rgba(239, 68, 68, 0.35);
+  
+  /* Transitions */
+  --form-transition-fast: 0.15s ease;
+  --form-transition-base: 0.3s ease;
+  --form-transition-slow: 0.5s ease;
+  
+  /* Border Radius */
+  --form-radius-sm: 8px;
+  --form-radius-md: 12px;
+  --form-radius-lg: 16px;
+  --form-radius-xl: 20px;
+  --form-radius-2xl: 28px;
+  --form-radius-full: 9999px;
+  
+  /* Gradients */
+  --form-gradient-blue: linear-gradient(135deg, #1877F2 0%, #0D65D9 100%);
+  --form-gradient-blue-light: linear-gradient(135deg, #E7F3FF 0%, #DBEAFE 100%);
+}
+
+/* ============================================
+DARK MODE VARIABLES
+============================================ */
+[data-theme="dark"] {
+  /* Background Colors */
+  --form-bg-primary: #1E293B;
+  --form-bg-secondary: #0F172A;
+  --form-bg-tertiary: #334155;
+  --form-bg-input: #1E293B;
+  --form-bg-hover: #2D3B4F;
+  --form-bg-page: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #172554 100%);
+  
+  /* Text Colors */
+  --form-text-primary: #F1F5F9;
+  --form-text-secondary: #CBD5E1;
+  --form-text-tertiary: #94A3B8;
+  --form-text-muted: #64748B;
+  --form-text-inverse: #0F172A;
+  --form-text-placeholder: #64748B;
+  
+  /* Border Colors */
+  --form-border-light: #334155;
+  --form-border-medium: #475569;
+  --form-border-focus: #4A9FF9;
+  
+  /* Adjusted Blues for Dark Mode */
+  --form-blue-lighter: #1E3A5F;
+  --form-blue-lightest: #172554;
+  
+  /* Status Colors for Dark Mode */
+  --form-success-light: #064E3B;
+  --form-success-bg: #022C22;
+  --form-success-text: #6EE7B7;
+  
+  --form-warning-light: #78350F;
+  --form-warning-bg: #451A03;
+  --form-warning-text: #FCD34D;
+  
+  --form-error-light: #7F1D1D;
+  --form-error-bg: #450A0A;
+  --form-error-text: #FCA5A5;
+  
+  --form-info-light: #1E3A8A;
+  --form-info-bg: #172554;
+  --form-info-text: #93C5FD;
+  
+  /* Enhanced Shadows for Dark Mode */
+  --form-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --form-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --form-shadow-md: 0 4px 15px rgba(0, 0, 0, 0.4);
+  --form-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --form-shadow-xl: 0 25px 60px rgba(0, 0, 0, 0.6);
+  
+  /* Enhanced Glows for Dark Mode */
+  --form-shadow-blue: 0 10px 40px rgba(24, 119, 242, 0.3);
+  --form-shadow-blue-lg: 0 20px 60px rgba(24, 119, 242, 0.35);
+  --form-glow-blue: 0 0 30px rgba(74, 159, 249, 0.5);
+  --form-glow-blue-soft: 0 0 20px rgba(74, 159, 249, 0.3);
+  --form-glow-blue-intense: 0 0 50px rgba(74, 159, 249, 0.6);
+  
+  --form-glow-success: 0 0 25px rgba(16, 185, 129, 0.5);
+  --form-glow-warning: 0 0 25px rgba(245, 158, 11, 0.5);
+  --form-glow-error: 0 0 25px rgba(239, 68, 68, 0.5);
+  
+  /* Gradient for Dark Mode */
+  --form-gradient-blue-light: linear-gradient(135deg, #1E3A5F 0%, #1E40AF 100%);
+}
+
+/* System preference detection */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --form-bg-primary: #1E293B;
+    --form-bg-secondary: #0F172A;
+    --form-bg-tertiary: #334155;
+    --form-bg-input: #1E293B;
+    --form-bg-hover: #2D3B4F;
+    --form-bg-page: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #172554 100%);
+    --form-text-primary: #F1F5F9;
+    --form-text-secondary: #CBD5E1;
+    --form-text-tertiary: #94A3B8;
+    --form-text-muted: #64748B;
+    --form-text-placeholder: #64748B;
+    --form-border-light: #334155;
+    --form-border-medium: #475569;
+    --form-blue-lighter: #1E3A5F;
+    --form-blue-lightest: #172554;
+    --form-success-light: #064E3B;
+    --form-success-bg: #022C22;
+    --form-success-text: #6EE7B7;
+    --form-warning-light: #78350F;
+    --form-warning-bg: #451A03;
+    --form-warning-text: #FCD34D;
+    --form-error-light: #7F1D1D;
+    --form-error-bg: #450A0A;
+    --form-error-text: #FCA5A5;
+    --form-info-light: #1E3A8A;
+    --form-info-bg: #172554;
+    --form-info-text: #93C5FD;
+    --form-glow-blue: 0 0 30px rgba(74, 159, 249, 0.5);
+    --form-glow-blue-intense: 0 0 50px rgba(74, 159, 249, 0.6);
+  }
+}
+
+/* ============================================
+MAIN FORM CONTAINER
+============================================ */
+.profile-form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 30px;
+  min-height: 100vh;
+  background: var(--form-bg-page);
+  transition: background var(--form-transition-slow);
+}
+
+/* ============================================
+FORM CARD
+============================================ */
+.form-card {
+  background: var(--form-bg-primary);
+  border-radius: var(--form-radius-2xl);
+  padding: 50px;
+  box-shadow: var(--form-shadow-xl);
+  border: 1px solid var(--form-border-light);
+  transition: all var(--form-transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative gradient border on top */
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--form-gradient-blue);
+}
+
+.form-card:hover {
+  box-shadow: var(--form-shadow-blue-lg), var(--form-glow-blue-soft);
+  border-color: var(--form-blue-lighter);
+  transform: translateY(-3px);
+}
+
+/* ============================================
+FORM HEADER
+============================================ */
+.form-header {
+  text-align: center;
+  margin-bottom: 45px;
+  position: relative;
+}
+
+.form-header h1 {
+  font-size: 2.6em;
+  font-weight: 800;
+  background: var(--form-gradient-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 14px;
+  letter-spacing: -0.5px;
+}
+
+.form-header p {
+  color: var(--form-text-secondary);
+  font-size: 1.15em;
+  line-height: 1.6;
+}
+
+.form-header .highlight {
+  color: var(--form-blue);
+  font-weight: 600;
+}
+
+/* ============================================
+FORM LOGO/ICON
+============================================ */
+.form-logo {
+  width: 95px;
+  height: 95px;
+  background: var(--form-gradient-blue);
+  border-radius: var(--form-radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28px;
+  box-shadow: var(--form-shadow-blue);
+  transition: all var(--form-transition-base);
+  position: relative;
+}
+
+/* Animated ring around logo */
+.form-logo::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: var(--form-radius-xl);
+  border: 2px solid var(--form-blue-light);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all var(--form-transition-base);
+}
+
+.form-logo:hover {
+  transform: scale(1.08) rotate(5deg);
+  box-shadow: var(--form-glow-blue-intense), var(--form-shadow-blue);
+}
+
+.form-logo:hover::before {
+  opacity: 1;
+  transform: scale(1);
+  animation: ringPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+.form-logo svg,
+.form-logo i,
+.form-logo span {
+  font-size: 2.5em;
+  color: var(--form-text-inverse);
+}
+
+/* ============================================
+FORM ROWS & GROUPS
+============================================ */
+.formRow,
+.form-row {
+  margin-bottom: 26px;
+}
+
+.form-group {
+  margin-bottom: 26px;
+  position: relative;
+}
+
+.form-group-inline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  margin-bottom: 26px;
+}
+
+/* ============================================
+LABELS
+============================================ */
+.form-label,
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--form-text-primary);
+  font-size: 0.98em;
+  letter-spacing: 0.3px;
+  transition: color var(--form-transition-fast);
+}
+
+.form-label .required,
+label .required {
+  color: var(--form-error);
+  margin-left: 3px;
+}
+
+/* Label with icon */
+.label-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label-icon {
+  color: var(--form-blue);
+  font-size: 1.1em;
+}
+
+/* ============================================
+INPUT FIELDS
+============================================ */
+.form-input,
+.form-textarea,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="tel"],
+input[type="password"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 16px 22px;
+  border: 2px solid var(--form-border-light);
+  border-radius: var(--form-radius-lg);
+  font-size: 1em;
+  color: var(--form-text-primary);
+  background: var(--form-bg-input);
+  transition: all var(--form-transition-base);
+  font-family: inherit;
+  box-shadow: var(--form-shadow-xs);
+}
+
+/* Hover State */
+.form-input:hover,
+.form-textarea:hover,
+.form-select:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="url"]:hover,
+input[type="number"]:hover,
+input[type="tel"]:hover,
+input[type="password"]:hover,
+input[type="date"]:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--form-blue-light);
+  background: var(--form-bg-hover);
+  box-shadow: var(--form-glow-blue-soft);
+}
+
+/* Focus State */
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--form-blue);
+  box-shadow: var(--form-glow-blue);
+  background: var(--form-bg-input);
+}
+
+/* Placeholder styling */
+.form-input::placeholder,
+.form-textarea::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--form-text-placeholder);
+  transition: color var(--form-transition-fast);
+}
+
+.form-input:focus::placeholder,
+.form-textarea:focus::placeholder,
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: transparent;
+}
+
+/* ============================================
+TEXTAREA SPECIFIC
+============================================ */
+.form-textarea,
+textarea {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+/* Textarea with character count */
+.textarea-wrapper {
+  position: relative;
+}
+
+.char-count {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  font-size: 0.8em;
+  color: var(--form-text-muted);
+  background: var(--form-bg-input);
+  padding: 2px 8px;
+  border-radius: var(--form-radius-sm);
+}
+
+.char-count.warning {
+  color: var(--form-warning-text);
+}
+
+.char-count.error {
+  color: var(--form-error-text);
+}
+
+/* ============================================
+SELECT SPECIFIC
+============================================ */
+.form-select,
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231877F2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  background-size: 18px;
+  padding-right: 50px;
+}
+
+.form-select option,
+select option {
+  background: var(--form-bg-primary);
+  color: var(--form-text-primary);
+  padding: 12px;
+}
+
+/* ============================================
+INPUT WITH ICON
+============================================ */
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon .form-input,
+.input-with-icon input {
+  padding-left: 52px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--form-blue);
+  font-size: 1.2em;
+  transition: all var(--form-transition-base);
+  pointer-events: none;
+}
+
+.input-with-icon:focus-within .input-icon {
+  color: var(--form-blue-dark);
+  transform: translateY(-50%) scale(1.15);
+}
+
+/* Input with right icon/button */
+.input-with-action {
+  position: relative;
+}
+
+.input-with-action .form-input,
+.input-with-action input {
+  padding-right: 52px;
+}
+
+.input-action-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--form-blue-lighter);
+  color: var(--form-blue);
+  border-radius: var(--form-radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--form-transition-base);
+}
+
+.input-action-btn:hover {
+  background: var(--form-blue);
+  color: var(--form-text-inverse);
+  box-shadow: var(--form-glow-blue-soft);
+}
+
+/* ============================================
+SKILLS INPUT SECTION
+============================================ */
+.skills-section {
+  background: var(--form-bg-secondary);
+  border-radius: var(--form-radius-xl);
+  padding: 28px;
+  margin-bottom: 28px;
+  border: 2px solid var(--form-border-light);
+  transition: all var(--form-transition-base);
+}
+
+.skills-section:hover {
+  border-color: var(--form-blue-light);
+  box-shadow: var(--form-glow-blue-soft);
+}
+
+.skills-section:focus-within {
+  border-color: var(--form-blue);
+  box-shadow: var(--form-glow-blue);
+}
+
+.skills-section h3 {
+  color: var(--form-blue);
+  margin-bottom: 18px;
+  font-size: 1.2em;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skills-section h3::before {
+  content: '💡';
+}
+
+.skills-input-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid var(--form-border-light);
+  border-radius: var(--form-radius-lg);
+  background: var(--form-bg-input);
+  min-height: 60px;
+  transition: all var(--form-transition-base);
+  align-items: center;
+}
+
+.skills-input-container:hover {
+  border-color: var(--form-blue-light);
+}
+
+.skills-input-container:focus-within {
+  border-color: var(--form-blue);
+  box-shadow: var(--form-glow-blue);
+}
+
+/* Skill Tags */
+.skill-tag-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--form-gradient-blue-light);
+  color: var(--form-blue);
+  padding: 10px 16px;
+  border-radius: var(--form-radius-full);
+  font-size: 0.92em;
+  font-weight: 600;
+  transition: all var(--form-transition-base);
+  animation: skillPopIn 0.3s ease;
+  border: 2px solid transparent;
+}
+
+@keyframes skillPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.skill-tag-input:hover {
+  background: var(--form-blue);
+  color: var(--form-text-inverse);
+  box-shadow: var(--form-glow-blue);
+  transform: translateY(-2px);
+}
+
+/* Verified/Present Skill - GREEN */
+.skill-tag-input.verified,
+.skill-tag-input.present,
+.skill-tag-input.has-skill {
+  background: var(--form-success-bg);
+  color: var(--form-success-text);
+  border-color: var(--form-success);
+}
+
+.skill-tag-input.verified:hover,
+.skill-tag-input.present:hover,
+.skill-tag-input.has-skill:hover {
+  background: var(--form-success);
+  color: var(--form-text-inverse);
+  box-shadow: var(--form-glow-success);
+}
+
+.skill-tag-input.verified::before,
+.skill-tag-input.present::before,
+.skill-tag-input.has-skill::before {
+  content: '✓';
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+/* Remove skill button */
+.skill-remove {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.2em;
+  line-height: 1;
+  opacity: 0.7;
+  transition: all var(--form-transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.skill-remove:hover {
+  opacity: 1;
+  transform: scale(1.2) rotate(90deg);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Skill input field */
+.skill-input-field {
+  flex: 1;
+  min-width: 150px;
+  border: none;
+  padding: 10px;
+  font-size: 1em;
+  background: transparent;
+  color: var(--form-text-primary);
+}
+
+.skill-input-field:focus {
+  outline: none;
+}
+
+.skill-input-field::placeholder {
+  color: var(--form-text-placeholder);
+}
+
+/* Skills suggestions dropdown */
+.skills-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--form-bg-primary);
+  border: 2px solid var(--form-blue);
+  border-radius: var(--form-radius-lg);
+  box-shadow: var(--form-shadow-lg);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 100;
+  margin-top: 8px;
+}
+
+.skill-suggestion-item {
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: all var(--form-transition-fast);
+  color: var(--form-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skill-suggestion-item:hover {
+  background: var(--form-blue-lighter);
+  color: var(--form-blue);
+}
+
+.skill-suggestion-item.selected {
+  background: var(--form-blue);
+  color: var(--form-text-inverse);
+}
+
+.skill-suggestion-icon {
+  color: var(--form-blue);
+}
+
+.skill-suggestion-item:hover .skill-suggestion-icon,
+.skill-suggestion-item.selected .skill-suggestion-icon {
+  color: inherit;
+}
+
+/* ============================================
+FILE UPLOAD
+============================================ */
+.file-upload-container {
+  border: 3px dashed var(--form-border-medium);
+  border-radius: var(--form-radius-xl);
+  padding: 50px;
+  text-align: center;
+  transition: all var(--form-transition-base);
+  cursor: pointer;
+  background: var(--form-bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.file-upload-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(24, 119, 242, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.file-upload-container:hover {
+  border-color: var(--form-blue);
+  background: var(--form-bg-hover);
+  box-shadow: var(--form-glow-blue-soft);
+}
+
+.file-upload-container:hover::before {
+  left: 100%;
+}
+
+.file-upload-container.drag-over {
+  border-color: var(--form-blue);
+  background: var(--form-blue-lighter);
+  transform: scale(1.02);
+  box-shadow: var(--form-glow-blue);
+}
+
+.file-upload-container.has-file {
+  border-color: var(--form-success);
+  background: var(--form-success-bg);
+}
+
+.file-upload-icon {
+  font-size: 4em;
+  color: var(--form-blue);
+  margin-bottom: 18px;
+  transition: all var(--form-transition-base);
+}
+
+.file-upload-container:hover .file-upload-icon {
+  transform: translateY(-8px) scale(1.1);
+  color: var(--form-blue-dark);
+}
+
+.file-upload-container.has-file .file-upload-icon {
+  color: var(--form-success);
+}
+
+.file-upload-text {
+  color: var(--form-text-secondary);
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.file-upload-text strong {
+  color: var(--form-blue);
+  cursor: pointer;
+}
+
+.file-upload-text strong:hover {
+  text-decoration: underline;
+}
+
+.file-upload-hint {
+  color: var(--form-text-muted);
+  font-size: 0.9em;
+}
+
+.file-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--form-success-text);
+  font-weight: 600;
+  margin-top: 18px;
+  padding: 12px 20px;
+  background: var(--form-success-light);
+  border-radius: var(--form-radius-full);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.file-selected-icon {
+  font-size: 1.3em;
+}
+
+.file-remove-btn {
+  background: none;
+  border: none;
+  color: var(--form-error);
+  cursor: pointer;
+  font-size: 1.1em;
+  padding: 4px;
+  margin-left: 8px;
+  transition: all var(--form-transition-fast);
+}
+
+.file-remove-btn:hover {
+  transform: scale(1.2);
+}
+
+/* ============================================
+CHECKBOX & RADIO
+============================================ */
+.checkbox-container,
+.radio-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  padding: 16px 20px;
+  border: 2px solid var(--form-border-light);
+  border-radius: var(--form-radius-lg);
+  transition: all var(--form-transition-base);
+  background: var(--form-bg-input);
+  user-select: none;
+}
+
+.checkbox-container:hover,
+.radio-container:hover {
+  border-color: var(--form-blue);
+  background: var(--form-bg-hover);
+  box-shadow: var(--form-glow-blue-soft);
+}
+
+.checkbox-container.checked,
+.radio-container.checked {
+  border-color: var(--form-blue);
+  background: var(--form-blue-lighter);
+}
+
+/* Custom checkbox */
+.custom-checkbox,
+.custom-radio {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--form-border-medium);
+  border-radius: var(--form-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--form-transition-base);
+  flex-shrink: 0;
+}
+
+.custom-radio {
+  border-radius: 50%;
+}
+
+.checkbox-container:hover .custom-checkbox,
+.radio-container:hover .custom-radio {
+  border-color: var(--form-blue);
+}
+
+.checkbox-container.checked .custom-checkbox,
+.radio-container.checked .custom-radio {
+  background: var(--form-blue);
+  border-color: var(--form-blue);
+  box-shadow: var(--form-glow-blue-soft);
+}
+
+.custom-checkbox::after,
+.custom-radio::after {
+  content: '✓';
+  color: var(--form-text-inverse);
+  font-weight: bold;
+  font-size: 0.9em;
+  opacity: 0;
+  transform: scale(0);
+  transition: all var(--form-transition-fast);
+}
+
+.custom-radio::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: var(--form-text-inverse);
+  border-radius: 50%;
+}
+
+.checkbox-container.checked .custom-checkbox::after,
+.radio-container.checked .custom-radio::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hidden native inputs */
+.checkbox-container input,
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkbox-label,
+.radio-label {
+  color: var(--form-text-primary);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Checkbox/Radio group */
+.checkbox-group,
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-group.inline,
+.radio-group.inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+FORM SECTIONS
+============================================ */
+.form-section {
+  margin-bottom: 45px;
+  padding-bottom: 40px;
+  border-bottom: 2px solid var(--form-border-light);
+  position: relative;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+}
+
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.form-section-title h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--form-text-primary);
+  margin: 0;
+}
+
+.form-section-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--form-gradient-blue-light);
+  border-radius: var(--form-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--form-blue);
+  font-size: 1.4em;
+  transition: all var(--form-transition-base);
+  flex-shrink: 0;
+}
+
+.form-section:hover .form-section-icon {
+  background: var(--form-gradient-blue);
+  color: var(--form-text-inverse);
+  box-shadow: var(--form-glow-blue);
+  transform: scale(1.05) rotate(5deg);
+}
+
+.form-section-description {
+  color: var(--form-text-secondary);
+  font-size: 0.95em;
+  margin-top: -15px;
+  margin-bottom: 25px;
+  margin-left: 68px;
+}
+
+/* Collapsible section */
+.form-section.collapsible .form-section-title {
+  cursor: pointer;
+}
+
+.form-section.collapsible .form-section-title::after {
+  content: '▼';
+  font-size: 0.8em;
+  color: var(--form-text-muted);
+  transition: transform var(--form-transition-base);
+  margin-left: auto;
+}
+
+.form-section.collapsible.collapsed .form-section-title::after {
+  transform: rotate(-90deg);
+}
+
+.form-section.collapsible.collapsed .form-section-content {
+  display: none;
+}
+
+/* ============================================
+SUBMIT BUTTON
+============================================ */
+.submit-btn,
+.form-submit-btn,
+button[type="submit"] {
+  width: 100%;
+  padding: 20px 40px;
+  background: var(--form-gradient-blue);
+  color: var(--form-text-inverse);
+  border: none;
+  border-radius: var(--form-radius-lg);
+  font-size: 1.18em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--form-transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  box-shadow: var(--form-shadow-blue);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 25px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shine effect */
+.submit-btn::before,
+.form-submit-btn::before,
+button[type="submit"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.submit-btn:hover,
+.form-submit-btn:hover,
+button[type="submit"]:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--form-glow-blue-intense), var(--form-shadow-blue-lg);
+}
+
+.submit-btn:hover::before,
+.form-submit-btn:hover::before,
+button[type="submit"]:hover::before {
+  left: 100%;
+}
+
+.submit-btn:active,
+.form-submit-btn:active,
+button[type="submit"]:active {
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled,
+.form-submit-btn:disabled,
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--form-shadow-md);
+}
+
+.submit-btn:disabled:hover,
+.form-submit-btn:disabled:hover,
+button[type="submit"]:disabled:hover {
+  transform: none;
+  box-shadow: var(--form-shadow-md);
+}
+
+.submit-btn:disabled::before,
+.form-submit-btn:disabled::before,
+button[type="submit"]:disabled::before {
+  display: none;
+}
+
+/* Loading spinner in button */
+.submit-btn .spinner,
+.form-submit-btn .spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--form-text-inverse);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Button icon */
+.submit-btn-icon {
+  font-size: 1.2em;
+  transition: transform var(--form-transition-base);
+}
+
+.submit-btn:hover .submit-btn-icon {
+  transform: translateX(5px);
+}
+
+/* ============================================
+SECONDARY BUTTON
+============================================ */
+.secondary-btn {
+  background: var(--form-bg-primary);
+  color: var(--form-blue);
+  border: 2px solid var(--form-blue);
+  box-shadow: none;
+}
+
+.secondary-btn:hover {
+  background: var(--form-blue-lighter);
+  box-shadow: var(--form-glow-blue-soft);
+}
+
+.secondary-btn:active {
+  background: var(--form-blue);
+  color: var(--form-text-inverse);
+}
+
+/* ============================================
+FORM ERROR STATE
+============================================ */
+.form-error,
+.input-error {
+  border-color: var(--form-error) !important;
+  background: var(--form-error-bg) !important;
+}
+
+.form-error:focus,
+.input-error:focus {
+  box-shadow: var(--form-glow-error) !important;
+}
+
+.error-message {
+  color: var(--form-error-text);
+  font-size: 0.88em;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.error-message::before {
+  content: '⚠';
+}
+
+/* ============================================
+FORM SUCCESS STATE
+============================================ */
+.form-success,
+.input-success {
+  border-color: var(--form-success) !important;
+  background: var(--form-success-bg) !important;
+}
+
+.form-success:focus,
+.input-success:focus {
+  box-shadow: var(--form-glow-success) !important;
+}
+
+.success-message {
+  color: var(--form-success-text);
+  font-size: 0.88em;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.success-message::before {
+  content: '✓';
+}
+
+/* ============================================
+HELPER TEXT
+============================================ */
+.helper-text {
+  color: var(--form-text-tertiary);
+  font-size: 0.88em;
+  margin-top: 8px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.helper-text-icon {
+  color: var(--form-blue);
+  flex-shrink: 0;
+}
+
+/* ============================================
+FORM DIVIDER
+============================================ */
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 40px 0;
+  color: var(--form-text-muted);
+}
+
+.form-divider::before,
+.form-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--form-border-light), transparent);
+}
+
+.form-divider span {
+  font-weight: 600;
+  font-size: 0.92em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--form-text-tertiary);
+}
+
+/* ============================================
+PROGRESS INDICATOR
+============================================ */
+.form-progress {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 45px;
+  align-items: center;
+}
+
+.progress-step {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--form-border-light);
+  transition: all var(--form-transition-base);
+  position: relative;
+}
+
+.progress-step.active {
+  background: var(--form-blue);
+  box-shadow: var(--form-glow-blue);
+  transform: scale(1.3);
+}
+
+.progress-step.completed {
+  background: var(--form-success);
+  box-shadow: var(--form-glow-success);
+}
+
+.progress-step.completed::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--form-text-inverse);
+  font-size: 0.6em;
+  font-weight: bold;
+}
+
+/* Progress line between steps */
+.progress-line {
+  width: 50px;
+  height: 3px;
+  background: var(--form-border-light);
+  border-radius: var(--form-radius-full);
+  transition: background var(--form-transition-base);
+}
+
+.progress-line.completed {
+  background: var(--form-success);
+}
+
+/* ============================================
+FORM CARD VARIANTS
+============================================ */
+
+/* Compact form card */
+.form-card.compact {
+  padding: 35px;
+}
+
+.form-card.compact .form-header h1 {
+  font-size: 2em;
+}
+
+/* Centered form card */
+.form-card.centered {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Form card with image */
+.form-card-with-image {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+  overflow: hidden;
+}
+
+.form-card-image {
+  background: var(--form-gradient-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.form-card-content {
+  padding: 50px;
+}
+
+/* ============================================
+FLOATING LABELS
+============================================ */
+.floating-label-group {
+  position: relative;
+  margin-bottom: 26px;
+}
+
+.floating-label-group .form-input,
+.floating-label-group input {
+  padding-top: 24px;
+  padding-bottom: 12px;
+}
+
+.floating-label {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--form-text-placeholder);
+  font-size: 1em;
+  pointer-events: none;
+  transition: all var(--form-transition-base);
+  background: transparent;
+}
+
+.floating-label-group .form-input:focus ~ .floating-label,
+.floating-label-group .form-input:not(:placeholder-shown) ~ .floating-label,
+.floating-label-group input:focus ~ .floating-label,
+.floating-label-group input:not(:placeholder-shown) ~ .floating-label {
+  top: 12px;
+  transform: translateY(0);
+  font-size: 0.75em;
+  color: var(--form-blue);
+  font-weight: 600;
+}
+
+/* ============================================
+RESPONSIVE DESIGN
+============================================ */
+@media (max-width: 768px) {
+  .profile-form-container {
+    padding: 24px 16px;
+  }
+
+  .form-card {
+    padding: 32px 24px;
+    border-radius: var(--form-radius-xl);
+  }
+
+  .form-header h1 {
+    font-size: 2em;
+  }
+
+  .form-group-inline {
+    grid-template-columns: 1fr;
+  }
+
+  .form-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .form-logo svg,
+  .form-logo i,
+  .form-logo span {
+    font-size: 2em;
+  }
+
+  .submit-btn,
+  .form-submit-btn,
+  button[type="submit"] {
+    padding: 18px 32px;
+    font-size: 1.05em;
+  }
+
+  .file-upload-container {
+    padding: 35px 25px;
+  }
+
+  .file-upload-icon {
+    font-size: 3em;
+  }
+
+  .form-section-title {
+    flex-wrap: wrap;
+  }
+
+  .form-section-title h2 {
+    font-size: 1.3em;
+  }
+
+  .form-section-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2em;
+  }
+
+  .form-section-description {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .form-card-with-image {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card-image {
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-card {
+    padding: 26px 18px;
+  }
+
+  .form-header h1 {
+    font-size: 1.7em;
+  }
+
+  .form-header p {
+    font-size: 1em;
+  }
+
+  .skills-section {
+    padding: 20px;
+  }
+
+  .skill-tag-input {
+    padding: 8px 14px;
+    font-size: 0.88em;
+  }
+
+  .form-section-title h2 {
+    font-size: 1.2em;
+  }
+
+  .checkbox-container,
+  .radio-container {
+    padding: 14px 16px;
+  }
+
+  .form-progress {
+    gap: 10px;
+  }
+
+  .progress-step {
+    width: 12px;
+    height: 12px;
+  }
+
+  .progress-line {
+    width: 30px;
+  }
+}
+
+/* ============================================
+PRINT STYLES
+============================================ */
+@media print {
+  .profile-form-container {
+    background: white !important;
+    padding: 20px;
+  }
+
+  .form-card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+
+  .form-card::before {
+    display: none;
+  }
+
+  .submit-btn,
+  .form-submit-btn,
+  button[type="submit"],
+  .secondary-btn,
+  .file-upload-container {
+    display: none !important;
+  }
+
+  .form-input,
+  .form-textarea,
+  .form-select,
+  input,
+  textarea,
+  select {
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ============================================
+ACCESSIBILITY
+============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .skill-tag-input,
+  .file-selected,
+  .error-message,
+  .form-logo::before {
+    animation: none;
+  }
+
+  .form-card,
+  .form-input,
+  .form-textarea,
+  .form-select,
+  .submit-btn,
+  .checkbox-container,
+  .radio-container,
+  .file-upload-container,
+  input,
+  textarea,
+  select,
+  button {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .form-input,
+  .form-textarea,
+  .form-select,
+  input,
+  textarea,
+  select {
+    border-width: 3px;
+  }
+
+  .submit-btn,
+  .form-submit-btn,
+  button[type="submit"] {
+    border: 3px solid var(--form-blue-dark);
+  }
+}
+
+/* Focus visible for keyboard navigation */
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.form-select:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.submit-btn:focus-visible,
+button:focus-visible,
+.checkbox-container:focus-visible,
+.radio-container:focus-visible {
+  outline: 3px solid var(--form-blue);
+  outline-offset: 2px;
+}

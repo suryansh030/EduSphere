@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Resume - {{ name }}</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 30px; color: #0b2540; background: #fff; }
+  h1 { color: #0b2540; }
+  .divider { height:2px; background:#0ea5e9; margin:12px 0; border-radius:2px; }
+  .skill-badge { display:inline-block; padding:6px 10px; border-radius:8px; background:#e0f2fe; color:#0369a1; margin:4px; }
+  .section { margin-bottom:18px; }
+</style>
+</head>
+<body>
+  <h1>{{ name }}</h1>
+  <div><strong>Department:</strong> {{ department }}</div>
+  <div class="divider"></div>
+
+  <div class="section">
+    <h2>Professional Summary</h2>
+    <p>Automatically generated portfolio summary for target role.</p>
+  </div>
+
+  <div class="section">
+    <h2>Skills</h2>
+    {% for sk in user_skills %}
+      <span class="skill-badge">{{ sk }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="section">
+    <h2>Projects</h2>
+    {% if projects %}
+      {% for p in projects %}
+        <div style="margin-bottom:8px;">
+          <strong>{{ p.title }}</strong>
+          <div>{{ p.description }}</div>
+          {% if p.link %}<div><a href="{{ p.link }}">{{ p.link }}</a></div>{% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <div>No projects provided.</div>
+    {% endif %}
+  </div>
+
+  <div class="section">
+    <h2>Roadmap</h2>
+    {% if roadmap.paths %}
+      {% for p in roadmap.paths %}
+        <div><strong>{{ p.domain }}</strong></div>
+        <ul>
+          {% for s in p.next_steps %}
+            <li>{{ s }}</li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    {% else %}
+      <div>No roadmap available.</div>
+    {% endif %}
+  </div>
+</body>
+</html>
