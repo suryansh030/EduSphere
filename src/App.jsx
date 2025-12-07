@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
+// Adding .jsx extensions back to fix file resolution errors
 // Landing + Role Select
 import LandingPage from "./pages/LandingPage.jsx";
-import RoleSelectPage from "./pages/RoleSelectPage.jsx";
 
 // Student Pages
 import StudentSignUpPage from "./pages/StudentSignupPage.jsx";
@@ -11,19 +11,22 @@ import StudentLoginPage from "./pages/StudentLoginPage.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
 import LogbookPage from "./pages/LogBook.jsx";
 import ActivityTrackerPage from "./pages/StudentActivityTracker.jsx";
-import Internships from "../src/pages/InternshipsPage.jsx";
-import Courses from "../src/pages/CoursesPage.jsx";
-import Mentors from "../src/pages/MentorsPage.jsx";
-import Certificates from "../src/pages/Certificates.jsx";
+import Internships from "./pages/InternshipsPage.jsx";
+import Courses from "./pages/CoursesPage.jsx";
+import Mentors from "./pages/MentorsPage.jsx";
+import Certificates from "./pages/Certificates.jsx";
 import MentorLoginPage from "./pages/MentorLoginPage.jsx";
 import MentorSignupPage from "./pages/MentorSignupPage.jsx";
 import MentorDashboard from "./pages/MentorDashboard.jsx";
-
-// Faculty Pages
-import FacultyLoginPage from "./pages/FacultyLoginPage.jsx"; 
+import ProfilePage from "./pages/StudentProfile.jsx";
+import RoleSelectPage from "./pages/RoleSelectPage.jsx";
+import FacultyLoginPage from "./pages/FacultyLoginPage.jsx";
 import FacultySignupPage from "./pages/FacultySignupPage.jsx";
 import FacultyDashboard from "./pages/FacultyDashboard.jsx";
-import AcademicDashboard from "../src/pages/AcademicDashboard.jsx";
+import AcademicDashboard from "./pages/AcademicDashboard.jsx";
+
+/* NEW: Internship Report page */
+import InternshipReport from "./pages/InternshipReport.jsx";
 
 // Company Pages
 import CompanySignupPage from "./pages/CompanySignupPage.jsx";
@@ -43,7 +46,7 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/roleselect" element={<RoleSelectPage />} />
 
-        {/* ---------------- STUDENT ROUTES ---------------- */}
+        {/* Student Routes */}
         <Route path="/studentsignup" element={<StudentSignUpPage />} />
         <Route path="/studentlogin" element={<StudentLoginPage />} />
         <Route path="/studentdashboard" element={<StudentDashboard />} />
@@ -62,15 +65,20 @@ export default function App() {
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/academicdashboard" element={<AcademicDashboard />} />
         <Route path="/certificates" element={<Certificates />} />
+
+        {/* Mentor Routes */}
         <Route path="/mentorlogin" element={<MentorLoginPage />} />
         <Route path="/mentorsignup" element={<MentorSignupPage />} />
         <Route path="/mentordashboard" element={<MentorDashboard />} />
+        <Route path="/studentprofile" element={<ProfilePage />} />
 
         {/* ---------------- ADMIN ROUTES ---------------- */}
         <Route path="/adminsignup" element={<AdminSignupPage />} />
         <Route path="/adminlogin" element={<AdminLoginPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />  
 
+        {/* NEW: Internship Report Generator */}
+        <Route path="/internship-report" element={<InternshipReport />} />
       </Routes>
     </div>
   );
