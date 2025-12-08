@@ -10,7 +10,7 @@ export default function Sidebar({
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Close on ESC key
+  // Close on ESC
   useEffect(() => {
     if (!open) return;
     function onKey(e) {
@@ -21,7 +21,7 @@ export default function Sidebar({
   }, [open, onClose]);
 
   // ---------------------------------------------------------
-  // 1. CONTROL CENTER: Switch Case for Navigation
+  // Navigation Handler
   // ---------------------------------------------------------
   const handleNavigation = (key) => {
     switch (key) {
@@ -30,8 +30,7 @@ export default function Sidebar({
         break;
 
       case "profile":
-        // Just go to the main dashboard wrapper
-        navigate("/studentprofile"); 
+        navigate("/studentprofile");
         break;
 
       case "logbook":
@@ -42,9 +41,6 @@ export default function Sidebar({
         navigate("/activitytracker");
         break;
 
-      // --- CONDITIONAL DASHBOARD VIEWS ---
-      // These navigate to the same URL but pass different 'state'
-      // Your Dashboard page should read location.state.view to render the component
       case "academics":
         navigate("/academicdashboard");
         break;
@@ -65,6 +61,10 @@ export default function Sidebar({
         navigate("/internships");
         break;
 
+      case "chat":
+        navigate("/studentchat");
+        break;
+
       case "help":
         navigate("");
         break;
@@ -77,48 +77,55 @@ export default function Sidebar({
         console.warn(`No route defined for key: ${key}`);
         break;
     }
-    
-    // Always close sidebar after clicking a link
+
     if (onClose) onClose();
   };
 
   // ---------------------------------------------------------
-  // 2. ACTIVE STATE LOGIC
+  // Active State Logic
   // ---------------------------------------------------------
-  // Helper to check if a specific key is currently active
   const isKeyActive = (key) => {
     const path = location.pathname;
-    const view = location.state?.view; // Grab view from state
+    const view = location.state?.view;
 
     switch (key) {
       case "home":
-        return path === "/";
+        return path === "/studentdashboard";
+
       case "profile":
-        return path === "/studentprofile" && !view; // Default dashboard view
+        return path === "/studentprofile";
+
       case "logbook":
         return path.startsWith("/logbook");
+
       case "activity":
         return path.startsWith("/activitytracker");
-      
-      // Check both path AND specific view state
+
       case "academics":
         return path === "/studentdashboard" && view === "academics";
+
       case "certifications":
         return path === "/studentdashboard" && view === "certifications";
+
       case "courses":
         return path === "/studentdashboard" && view === "courses";
+
       case "mentors":
         return path === "/studentdashboard" && view === "mentors";
+
       case "internships":
         return path === "/studentdashboard" && view === "internships";
-        
+
+      case "chat":
+        return path === "/studentchat";
+
       default:
         return false;
     }
   };
 
   // ---------------------------------------------------------
-  // 3. RENDERER
+  // Button UI Component
   // ---------------------------------------------------------
   const NavButton = ({ label, menuKey, badge }) => {
     const active = isKeyActive(menuKey);
@@ -126,9 +133,9 @@ export default function Sidebar({
     return (
       <button
         onClick={() => handleNavigation(menuKey)}
-        className={`w-full text-left flex items-center gap-3 py-3 px-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400
-          ${active 
-            ? "bg-blue-50 text-blue-700 font-semibold" 
+        className={`w-full text-left flex items-center gap-3 py-3 px-3 rounded-md transition-colors
+          ${active
+            ? "bg-blue-50 text-blue-700 font-semibold"
             : "hover:bg-gray-50 text-gray-800 font-medium"
           }`}
         type="button"
@@ -139,25 +146,29 @@ export default function Sidebar({
     );
   };
 
+  // ---------------------------------------------------------
+  // MAIN RENDER
+  // ---------------------------------------------------------
   return (
-    <div aria-hidden={!open} className={`fixed inset-0 z-50 pointer-events-none`}>
+    <div aria-hidden={!open} className="fixed inset-0 z-50 pointer-events-none">
       {/* Overlay */}
       <div
         onClick={onClose}
-        className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`absolute inset-0 bg-black/40 transition-opacity duration-300
+          ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       />
 
-      {/* Slide-in Panel */}
+      {/* Sidebar Panel */}
       <aside
-        className={`absolute right-0 top-0 h-full w-[20rem] max-w-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out
+        className={`absolute right-0 top-0 h-full w-[20rem] bg-white shadow-xl transform transition-transform duration-300
           ${open ? "translate-x-0 pointer-events-auto" : "translate-x-full pointer-events-none"}`}
       >
         <div className="h-full flex flex-col">
+
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-4 border-b">
             <div className="text-lg font-bold text-blue-600">Prashikshan</div>
+
             <div className="flex items-center gap-2">
               <button
                 onClick={() => handleNavigation("profile")}
@@ -166,7 +177,9 @@ export default function Sidebar({
                 <img
                   src={
                     user.avatarUrl ||
-                    `https://api.dicebear.com/6.x/initials/svg?seed=${encodeURIComponent(user.name)}`
+                    `https://api.dicebear.com/6.x/initials/svg?seed=${encodeURIComponent(
+                      user.name
+                    )}`
                   }
                   alt="avatar"
                   className="w-8 h-8 rounded-full border"
@@ -175,36 +188,35 @@ export default function Sidebar({
                   {user.name.split(" ")[0]}
                 </span>
               </button>
-              <button
-                onClick={onClose}
-                className="p-2 rounded-md hover:bg-gray-100"
-              >
+
+              <button onClick={onClose} className="p-2 rounded-md hover:bg-gray-100">
                 ✕
               </button>
             </div>
           </div>
 
-          {/* Nav Links */}
-          <nav className="px-3 py-4 space-y-1 overflow-auto flex-1">
+          {/* Navigation Items */}
+          <nav className="px-3 py-4 space-y-1 flex-1 overflow-auto">
             <NavButton label="Home" menuKey="home" />
             <NavButton label="Profile" menuKey="profile" />
             <NavButton label="Logbook" menuKey="logbook" />
             <NavButton label="Activity Feed" menuKey="activity" />
-            
+
             <div className="pt-2 pb-1">
               <p className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
                 Learning
               </p>
             </div>
-            
+
             <NavButton label="Academics" menuKey="academics" />
             <NavButton label="Certifications" menuKey="certifications" />
             <NavButton label="Courses" menuKey="courses" />
             <NavButton label="Mentors" menuKey="mentors" />
             <NavButton label="Internships" menuKey="internships" />
+            <NavButton label="Chat" menuKey="chat" />
           </nav>
 
-          {/* Footer Actions */}
+          {/* Footer */}
           <div className="mt-auto px-4 py-4 border-t">
             <button
               onClick={() => handleNavigation("help")}
@@ -220,6 +232,7 @@ export default function Sidebar({
               Sign out
             </button>
           </div>
+
         </div>
       </aside>
     </div>

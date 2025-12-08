@@ -5,9 +5,8 @@ import platform
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse, HTMLResponse
-from dotenv import load_dotenv
 
-load_dotenv()
+
 
 from ai_utils import (
     analyze_github_with_ai,
