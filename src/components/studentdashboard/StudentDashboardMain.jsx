@@ -1,7 +1,7 @@
 // src/pages/StudentDashboardMain.jsx
 import React, { useEffect, useState } from "react";
 
-
+import Courses from "./Courses";
 
 /**
  * StudentDashboardMain.jsx
@@ -75,7 +75,7 @@ export default function StudentDashboardMain() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
-  const [activeTab, setActiveTab] = useState("Overview"); // Tabs: Overview, Academics, My Applications, Learning, Schedule, Settings
+  const [activeTab, setActiveTab] = useState("Overview"); // Tabs: Overview, Academics, My Applications, Learning, Courses, Schedule, Settings
 
   useEffect(() => {
     // Simulate API Fetch
@@ -233,7 +233,10 @@ export default function StudentDashboardMain() {
               <CourseProgressCard key={course.id} course={course} />
            ))}
            {/* Add New Course Placeholder */}
-           <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer h-full min-h-[160px]">
+           <div
+             className="border-2 border-dashed border-gray-300 rounded-xl p-6 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer h-full min-h-[160px]"
+             onClick={() => setActiveTab("Courses")}
+           >
               <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-3">
                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4"/></svg>
               </div>
@@ -242,6 +245,12 @@ export default function StudentDashboardMain() {
            </div>
         </div>
      </div>
+  );
+
+  const renderCourses = () => (
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <Courses />
+    </div>
   );
 
   const renderSchedule = () => (
@@ -323,7 +332,7 @@ export default function StudentDashboardMain() {
                 </div>
 
                 <div className="space-y-1">
-                   {["Overview", "Academics", "My Applications", "Learning", "Schedule", "Settings"].map((item) => (
+                   {["Overview", "Academics", "My Applications", "Learning", "Courses", "Schedule", "Settings"].map((item) => (
                       <button 
                          key={item} 
                          onClick={() => setActiveTab(item)}
@@ -360,6 +369,7 @@ export default function StudentDashboardMain() {
              {activeTab === "Academics" && renderAcademics()}
              {activeTab === "My Applications" && renderApplications()}
              {activeTab === "Learning" && renderLearning()}
+             {activeTab === "Courses" && renderCourses()}
              {activeTab === "Schedule" && renderSchedule()}
              {activeTab === "Settings" && renderSettings()}
           </main>

@@ -11,6 +11,10 @@ import threading
 
 # ---------------- API Keys ---------------- #
 # ---------------- API Keys from OS Environment ---------------- #
+from internship_data import (
+    get_trending_skills,
+    get_high_stipend_skills,
+)
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 GITHUB_TOKEN   = os.getenv("GITHUB_TOKEN")
@@ -748,7 +752,7 @@ Use proper capitalization for skill names (e.g., JavaScript not javascript, HTML
 Samples:{json.dumps(short_samples)}
 """
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-flash-latest")
     result = {"done": False, "data": None}
 
     def run():
@@ -765,7 +769,7 @@ Samples:{json.dumps(short_samples)}
     t.start()
 
     start = time.time()
-    while time.time() - start < 10 and not result["done"]:
+    while time.time() - start < 30 and not result["done"]:
         time.sleep(0.3)
 
     parsed = result["data"]
@@ -950,68 +954,136 @@ def generate_skill_proficiency_with_ai(user_skills, github_skills, user_projects
 
 # ===================== ROADMAP GENERATION ===================== #
 def generate_roadmap_with_courses(current_skills, target_role):
-    """Generate roadmap with embedded course links using Gemini"""
-    
-    # Canonicalize skills
+    """
+    Generate a roadmap using:
+    - current skills (from GitHub/user)
+    - internship CSV (trending + high‑stipend skills)
+    and ask Gemini to build TWO paths:
+      1) Standard path  (most common skills)
+      2) High‑value path (skills from high‑stipend internships)
+    """
+
+    # Canonicalize skills from user/GitHub
     canonical_skills = [canonicalize_skill_name(s) for s in current_skills]
-    
+
+    # 🔹 NEW: use your CSV to get skills for this role
+    trending = get_trending_skills(target_role=target_role, top_n=25)
+    high_value = get_high_stipend_skills(target_role=target_role, top_n=15)
+
     try:
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        
+        model = genai.GenerativeModel("gemini-flash-latest")
+
         prompt = f"""
-        Create a comprehensive career roadmap for transitioning to {target_role}.
-        Current skills: {', '.join(canonical_skills)}
-        
-        Return a detailed JSON roadmap with REAL, WORKING course URLs.
-        
-        Format:
+You are an expert career mentor.
+
+The user wants to become: "{target_role}".
+Current verified skills: {canonical_skills or "none"}.
+
+Below is aggregated data from 6000+ real internships.
+Each object has "skill" and "count" (how many internships require that skill).
+
+GENERAL TRENDING SKILLS for this role:
+{json.dumps(trending, indent=2)}
+
+HIGH-STIPEND SKILLS for this role:
+{json.dumps(high_value, indent=2)}
+
+TASK:
+
+1. Design TWO learning paths and put them in the "paths" array:
+
+   Path 1: "Standard {target_role} Path"
+   - Use the most frequent skills from GENERAL TRENDING SKILLS.
+   - Show a logical progression from the user's current skills to a solid {target_role}.
+   - Example for frontend: HTML → CSS → JavaScript → React → state management → testing.
+
+   Path 2: "High-Value {target_role} Path"
+   - Start from the same fundamentals (HTML/CSS/JavaScript if needed),
+     then emphasise skills that occur in HIGH-STIPEND SKILLS
+     (for example Solidity/Web3/etc. if present in the data).
+   - For EACH step in this path, add a "possible_roles" field with 1–3 concrete job titles
+     the user could aim for after finishing that step
+     (e.g. "Web3 Frontend Engineer", "Blockchain dApp Developer").
+
+2. Only use skills that appear in the datasets above,
+   plus obvious prerequisites like "Programming basics", "Git", "Data Structures & Algorithms".
+
+3. For every step in BOTH paths, recommend 1–3 REAL online courses with working URLs.
+
+4. Return ONLY valid JSON in this exact structure:
+
+{{
+  "current_position": "Short description of where the user is now",
+  "target_position": "{target_role}",
+  "paths": [
+    {{
+      "path_name": "Standard {target_role} Path",
+      "description": "Why this is the common path",
+      "difficulty": "Easy/Medium/Hard",
+      "timeline": "e.g. 6-9 months",
+      "steps": [
         {{
-          "current_position": "Current level description",
-          "target_position": "{target_role}",
-          "paths": [
+          "step_number": 1,
+          "title": "Step title",
+          "estimated_time": "e.g. 4-6 weeks",
+          "skills_to_learn": ["skill1", "skill2"],
+          "courses": [
             {{
-              "path_name": "Path name",
-              "description": "Why this path",
-              "difficulty": "Easy/Medium/Hard",
-              "timeline": "6-12 months",
-              "steps": [
-                {{
-                  "step_number": 1,
-                  "title": "Master Core Skills",
-                  "estimated_time": "2-3 months",
-                  "skills_to_learn": ["React", "Node.js"],
-                  "courses": [
-                    {{
-                      "name": "React Complete Guide",
-                      "platform": "Udemy",
-                      "url": "https://www.udemy.com/course/react-the-complete-guide-incl-redux/",
-                      "level": "Beginner to Advanced"
-                    }}
-                  ]
-                }}
-              ]
+              "name": "Course name",
+              "platform": "Udemy/Coursera/...",
+              "url": "https://... real link ...",
+              "level": "Beginner/Intermediate/Advanced"
             }}
-          ],
-          "required_skills": ["skill1", "skill2"],
-          "optional_skills": ["skill3"]
+          ]
         }}
-        
-        Include at least 3 different career paths with 3-5 steps each.
-        Each step should have 2-3 real course recommendations with actual URLs.
-        """
-        
+      ]
+    }},
+    {{
+      "path_name": "High-Value {target_role} Path",
+      "description": "Focus on skills that lead to higher‑stipend roles",
+      "difficulty": "Medium/Hard",
+      "timeline": "e.g. 6-12 months",
+      "steps": [
+        {{
+          "step_number": 1,
+          "title": "Step title",
+          "estimated_time": "e.g. 4-6 weeks",
+          "skills_to_learn": ["skill1", "skill2"],
+          "possible_roles": ["Role 1", "Role 2"],
+          "courses": [
+            {{
+              "name": "Course name",
+              "platform": "Udemy/Coursera/...",
+              "url": "https://... real link ...",
+              "level": "Beginner/Intermediate/Advanced"
+            }}
+          ]
+        }}
+      ]
+    }}
+  ],
+  "required_skills": ["skill1", "skill2"],
+  "optional_skills": ["skill3", "skill4"]
+}}
+
+No explanation outside the JSON.
+"""
+
         response = model.generate_content(prompt)
         text = response.text
-        
-        json_match = re.search(r'\{.*\}', text, re.DOTALL)
-        
+
+        # Extract JSON out of the response
+        json_match = re.search(r"\{.*\}", text, re.DOTALL)
+
         if json_match:
             roadmap = json.loads(json_match.group())
+            # Keep your existing enrichment (adds course links if missing)
             roadmap = enrich_roadmap_with_courses(roadmap)
             return roadmap
         else:
+            # Use your old fallback if Gemini response is messy
             return create_fallback_roadmap_with_courses(canonical_skills, target_role)
-            
+
     except Exception as e:
         print(f"⚠️ Roadmap generation error: {str(e)}")
         return create_fallback_roadmap_with_courses(canonical_skills, target_role)
@@ -1233,43 +1305,93 @@ def find_job_opportunities(skills, target_role):
 
 # ===================== INDUSTRY TRENDS ===================== #
 def get_industry_trends(target_role):
-    """Get industry trends using Gemini AI"""
-    
-    try:
-        model = genai.GenerativeModel("gemini-1.5-flash")
+    """
+    Get industry trends using the internships.csv dataset,
+    not by asking Gemini to search the web.
 
-        prompt = f"""
-        What are the top 10 most in-demand, trending skills for {target_role} in 2024-2025?
-        
-        Return as JSON array:
-        [
-          {{
-            "skill": "Skill name (use proper capitalization like JavaScript, HTML, React)",
-            "trend": "hot/rising/stable",
-            "description": "Why this skill matters (one sentence)"
-          }}
-        ]
-        
-        Focus on practical, current technologies and frameworks.
-        Use proper capitalization for skill names.
-        """
-        
-        response = model.generate_content(prompt)
-        text = response.text
-        
-        json_match = re.search(r'\[.*\]', text, re.DOTALL)
-        
-        if json_match:
-            trends = json.loads(json_match.group())
-            # Canonicalize trend skill names
-            for trend in trends:
-                trend['skill'] = canonicalize_skill_name(trend.get('skill', ''))
-            return trends
-        else:
+    Returns a list like:
+    [
+      {
+        "skill": "React",
+        "trend": "hot" | "rising" | "stable",
+        "description": "...",
+        "count": 120,                 # how many internships mention it
+        "high_stipend_mentions": 45   # how many high‑stipend internships mention it
+      },
+      ...
+    ]
+    """
+
+    try:
+        # From your CSV: top skills for this role
+        general = get_trending_skills(target_role=target_role, top_n=20)
+        high = get_high_stipend_skills(target_role=target_role, top_n=10)
+
+        # If we have no data for this role, fall back to the static list you already had
+        if not general:
             return get_fallback_trends(target_role)
-            
+
+        high_counts = {item["skill"]: item["count"] for item in high}
+        max_count = max(item["count"] for item in general) or 1
+
+        trends = []
+
+        # Main list from general frequency
+        for item in general:
+            raw_skill = item["skill"]        # lower‑case from CSV
+            count = int(item["count"])
+            skill = canonicalize_skill_name(raw_skill)
+
+            ratio = count / max_count
+            if ratio >= 0.67:
+                trend_label = "hot"
+            elif ratio >= 0.34:
+                trend_label = "rising"
+            else:
+                trend_label = "stable"
+
+            high_count = int(high_counts.get(raw_skill, 0))
+
+            desc = (
+                f"Required in {count} internships for "
+                f"{target_role or 'this role'} in our dataset."
+            )
+            if high_count:
+                desc += f" Also common in higher‑stipend internships ({high_count} listings)."
+
+            trends.append({
+                "skill": skill,
+                "trend": trend_label,
+                "description": desc,
+                "count": count,
+                "high_stipend_mentions": high_count,
+            })
+
+        # Add any extra skills that only appear in the high‑stipend list
+        general_skill_set = {item["skill"] for item in general}
+        for item in high:
+            if item["skill"] in general_skill_set:
+                continue
+            raw_skill = item["skill"]
+            count = int(item["count"])
+            skill = canonicalize_skill_name(raw_skill)
+            desc = (
+                f"Appears mainly in higher‑stipend internships for "
+                f"{target_role or 'this role'} in our dataset."
+            )
+            trends.append({
+                "skill": skill,
+                "trend": "hot",
+                "description": desc,
+                "count": count,
+                "high_stipend_mentions": count,
+            })
+
+        return trends
+
     except Exception as e:
-        print(f"⚠️ Trends error: {str(e)}")
+        print(f"⚠️ Trends error (dataset): {str(e)}")
+        # fall back to your old static list if something goes wrong
         return get_fallback_trends(target_role)
 
 
