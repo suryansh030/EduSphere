@@ -6,6 +6,7 @@ export default function MentorLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState(null);
 
   function validate() {
@@ -20,6 +21,12 @@ export default function MentorLoginPage() {
     const v = validate();
     if (v) return setError(v);
     setError(null);
+    
+    // Handle Remember Me - store in backend later
+    if (rememberMe) {
+      console.log('Remember Me enabled - Will store mentor credentials in backend:', { email });
+      // Backend implementation: Store encrypted credentials securely
+    }
     
     // Mock login - Navigate to mentor dashboard
     navigate("/mentordashboard");
@@ -146,7 +153,27 @@ export default function MentorLoginPage() {
                 </div>
               </div>
 
-              {/* Forgot Password */}
+            {/* Remember Me Checkbox */}
+            <div className="flex items-center gap-3 pt-1">
+              <button
+                type="button"
+                onClick={() => setRememberMe(!rememberMe)}
+                className={`flex items-center justify-center w-6 h-6 rounded border-2 transition-all flex-shrink-0 mt-0.5 ${
+                  rememberMe
+                    ? 'bg-blue-600 border-blue-600'
+                    : 'border-slate-300 hover:border-blue-500'
+                }`}
+              >
+                {rememberMe && (
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+              </button>
+              <label className="text-sm font-medium text-slate-700 cursor-pointer leading-6">
+                Remember me on this device
+              </label>
+            </div>              {/* Forgot Password */}
               <div className="text-right">
                 <button
                   type="button"

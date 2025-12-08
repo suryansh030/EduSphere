@@ -10,6 +10,7 @@ export default function FacultyLoginPage() {
   });
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -32,11 +33,15 @@ export default function FacultyLoginPage() {
     // --- Authentication Logic Placeholder ---
     console.log('Attempting Faculty Login with:', formData);
     
+    // Handle Remember Me - store in backend later
+    if (rememberMe) {
+      console.log('Remember Me enabled - Will store faculty credentials in backend:', { identifier: formData.facultyIdentifier });
+      // Backend implementation: Store encrypted credentials securely
+    }
+    
     // Simulate successful login and redirect to the Faculty Dashboard
-    navigate('/faculty/dashboard'); 
-  };
-
-  const handleSocialLogin = (platform) => {
+    navigate('/faculty/dashboard');
+  };  const handleSocialLogin = (platform) => {
     console.log(`Logging in via ${platform}`);
     // Placeholder for actual SSO/Social login logic
     setError(`Please set up institutional login for ${platform}. Using email/password for now.`);
@@ -231,6 +236,28 @@ export default function FacultyLoginPage() {
                     {showPassword ? "HIDE" : "SHOW"}
                   </button>
               </div>
+            </div>
+
+            {/* Remember Me Checkbox */}
+            <div className="flex items-center gap-3 pt-1">
+              <button
+                type="button"
+                onClick={() => setRememberMe(!rememberMe)}
+                className={`flex items-center justify-center w-6 h-6 rounded border-2 transition-all flex-shrink-0 mt-0.5 ${
+                  rememberMe
+                    ? 'bg-indigo-600 border-indigo-600'
+                    : 'border-gray-300 hover:border-indigo-500'
+                }`}
+              >
+                {rememberMe && (
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+              </button>
+              <label className="text-sm font-medium text-gray-700 cursor-pointer leading-6">
+                Remember me on this device
+              </label>
             </div>
             
             {/* Forgot Password Link */}

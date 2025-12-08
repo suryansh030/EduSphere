@@ -18,6 +18,7 @@ export default function AdminLoginPage() {
     
     // --- UI State ---
     const [showPassword, setShowPassword] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -42,6 +43,12 @@ export default function AdminLoginPage() {
         
         // --- Login Logic Placeholder ---
         console.log('Attempting Admin Login with:', formData);
+        
+        // Handle Remember Me - store in backend later
+        if (rememberMe) {
+            console.log('Remember Me enabled - Will store admin credentials in backend:', { email: formData.systemEmail });
+            // Backend implementation: Store encrypted credentials securely
+        }
         
         // Simulation: Wait and either succeed or fail
         setTimeout(() => {
@@ -192,6 +199,28 @@ export default function AdminLoginPage() {
                                     Forgot Password?
                                 </Link>
                             </div>
+                          </div>
+
+                          {/* Remember Me Checkbox */}
+                          <div className="flex items-center gap-3 pt-1">
+                            <button
+                              type="button"
+                              onClick={() => setRememberMe(!rememberMe)}
+                              className={`flex items-center justify-center w-6 h-6 rounded border-2 transition-all flex-shrink-0 mt-0.5 ${
+                                rememberMe
+                                  ? 'bg-cyan-600 border-cyan-600'
+                                  : 'border-slate-300 hover:border-cyan-500'
+                              }`}
+                            >
+                              {rememberMe && (
+                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </button>
+                            <label className="text-sm font-medium text-slate-700 cursor-pointer leading-6">
+                              Remember me on this device
+                            </label>
                           </div>
 
                           {/* Action Buttons */}
